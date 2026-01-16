@@ -1,6 +1,17 @@
-/* Tailwind reset + utilities */
-@import "tailwindcss/preflight";
-@tailwind utilities;
+/* Tailwind CSS v4 */
+@import "tailwindcss";
+
+/* Theme configuration for Tailwind v4 */
+@theme {
+	--breakpoint-sm: 640px;
+	--breakpoint-md: 768px;
+	--breakpoint-lg: 1024px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
+
+	--font-family-excon: "Excon", system-ui, sans-serif;
+	--font-family-renade: "Renade", system-ui, sans-serif;
+}
 
 /* Third-party animations */
 @import "tw-animate-css";
@@ -67,6 +78,36 @@
 	display: inline-block;
 	transform-style: preserve-3d;
 	will-change: transform;
+}
+
+/* Hero text responsive sizing with CSS media queries */
+.hero-title {
+	font-size: 48px;
+	letter-spacing: 10px;
+}
+
+.hero-dot {
+	font-size: 80px;
+}
+
+@media (min-width: 640px) {
+	.hero-title {
+		font-size: 72px;
+		letter-spacing: 20px;
+	}
+	.hero-dot {
+		font-size: 120px;
+	}
+}
+
+@media (min-width: 768px) {
+	.hero-title {
+		font-size: 102px;
+		letter-spacing: 30px;
+	}
+	.hero-dot {
+		font-size: 180px;
+	}
 }
 
 /* Text shadow for depth */

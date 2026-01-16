@@ -18,7 +18,7 @@ export const Navigation: React.FC = () => {
 		<nav className={`bg-[#f8f3e6] w-screen fixed border-b-[0.5px] top-0 left-0 z-50 transition-transform duration-300 ${show ? 'translate-y-0' : '-translate-y-full'}`}>
 			<div className="px-[16px] py-[8px] flex flex-row items-center justify-between">
 				<div className="flex items-center flex-row w-[200px]">
-					<Link to="/" className="font-renade uppercase text-[12px] font-extrabold text-gray-900">Gelbe Seiten.</Link>
+					<Link to="/" className="font-renade uppercase text-[12px] font-extrabold text-gray-900">Gelbe Seiten<span className="text-[#facc15]">.</span></Link>
 				</div>
 				<div className="flex flex-row items-center justify-end gap-[10px]">
 					<a href="https://www.gelbeseiten.de/gsservice/barrierefrei" aria-label="Barrierefreiheit" className="hover-wiggle flex items-center justify-center h-[28px] w-[28px] rounded-full border border-gray-300 bg-white">

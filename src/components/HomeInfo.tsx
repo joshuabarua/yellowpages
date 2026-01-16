@@ -98,12 +98,12 @@ const gridItems = [
 ];
 
 const cardColors = [
-	'from-yellow-100 to-yellow-50',
-	'from-blue-50 to-cyan-50',
-	'from-orange-50 to-amber-50',
-	'from-green-50 to-emerald-50',
-	'from-purple-50 to-violet-50',
-	'from-pink-50 to-rose-50',
+	'from-[#f9f9f9] to-[#ffffff]',
+	'from-[#fafafa] to-[#ffffff]',
+	'from-[#f8f8f8] to-[#ffffff]',
+	'from-[#fafafa] to-[#ffffff]',
+	'from-[#f9f9f9] to-[#ffffff]',
+	'from-[#fafafa] to-[#ffffff]',
 ];
 
 const HomeInfo: React.FC = () => {
@@ -132,20 +132,20 @@ const HomeInfo: React.FC = () => {
 	}, []);
 
 	return (
-		<section className="w-full bg-[#faf8f3] py-[80px]">
-			<div className="max-w-6xl mx-auto px-[48px]">
-				<div className="flex flex-col md:flex-row md:items-end md:justify-between mb-[48px]">
+		<section className="w-full bg-[#faf8f3] py-[48px] md:py-[80px]">
+			<div className="max-w-6xl mx-auto px-[24px] md:px-[48px]">
+				<div className="flex flex-col md:flex-row md:items-end md:justify-between mb-[32px] md:mb-[48px]">
 					<div>
-						<h2 className="font-renade text-[11px] uppercase tracking-[0.15em] text-gray-400 mb-[12px]">Entdecken</h2>
-						<h1 className="font-renade text-[32px] text-[#323131]">Unsere Top-Angebote</h1>
+						<h2 className="font-renade text-[11px] uppercase tracking-[0.15em] text-gray-400 mb-[8px] md:mb-[12px]">Entdecken</h2>
+						<h1 className="font-renade text-[24px] md:text-[32px] text-[#323131]">Unsere Top-Angebote</h1>
 					</div>
-					<div className="flex gap-[48px] md:gap-[80px] mt-6 md:mt-0">
-						<div className="text-right">
-							<p className="font-renade text-[28px] text-gray-900"><AnimatedCounter target={4000000} suffix="+" /></p>
+					<div className="flex gap-[32px] md:gap-[80px] mt-4 md:mt-0">
+						<div className="text-left md:text-right">
+							<p className="font-renade text-[22px] md:text-[28px] text-gray-900"><AnimatedCounter target={4000000} suffix="+" /></p>
 							<p className="font-excon text-[11px] text-gray-500">Einträge</p>
 						</div>
-						<div className="text-right">
-							<p className="font-renade text-[28px] text-gray-900"><AnimatedCounter target={500000} suffix="+" /></p>
+						<div className="text-left md:text-right">
+							<p className="font-renade text-[22px] md:text-[28px] text-gray-900"><AnimatedCounter target={500000} suffix="+" /></p>
 							<p className="font-excon text-[11px] text-gray-500">Bewertungen</p>
 						</div>
 					</div>

@@ -28,14 +28,20 @@ describe('Home', () => {
         vi.useRealTimers();
     });
 
-    it('renders the hero text GELBE', () => {
+    it('renders the hero text GELBE letters', () => {
         render(<Home />);
-        expect(screen.getByText('GELBE')).toBeInTheDocument();
+        expect(screen.getByText('G')).toBeInTheDocument();
+        expect(screen.getAllByText('E').length).toBeGreaterThan(0);
+        expect(screen.getByText('L')).toBeInTheDocument();
+        expect(screen.getByText('B')).toBeInTheDocument();
     });
 
-    it('renders the hero text SEITEN', () => {
+    it('renders the hero text SEITEN letters', () => {
         render(<Home />);
-        expect(screen.getByText('SEITEN')).toBeInTheDocument();
+        expect(screen.getByText('S')).toBeInTheDocument();
+        expect(screen.getByText('I')).toBeInTheDocument();
+        expect(screen.getByText('T')).toBeInTheDocument();
+        expect(screen.getByText('N')).toBeInTheDocument();
     });
 
     it('renders the yellow dot', () => {

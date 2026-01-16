@@ -44,21 +44,30 @@ Zustand, Zod, React Hook Form, shadcn/ui
 - **Performance:** Variable fonts, optimized bundle, GSAP ScrollTrigger for
   scroll-based animations
 
-## Scrapped: 3D Text Effect
+## 3D Bulge Text Effect
 
-Explored
-[Tympanus 3D bulge text](https://tympanus.net/codrops/2024/03/20/creating-an-interactive-3d-bulge-text-effect-with-react-three-fiber/)
-using React Three Fiber. Scrapped due to ~200KB bundle increase, mobile
-performance issues, and accessibility concerns. Remnants in
-`HeroTextShader.tsx`.
+CSS/JS magnetic bulge inspired by
+[Tympanus Codrops](https://tympanus.net/codrops/2024/03/20/creating-an-interactive-3d-bulge-text-effect-with-react-three-fiber/)
+— uses `perspective`, mouse tracking, and per-letter transforms. Zero bundle
+impact vs WebGL.
+
+## Tailwind CSS v4 Issues
+
+Breakpoint variants (`sm:`, `md:`, `lg:`) don't work reliably with
+`@tailwindcss/vite` plugin v4.1.18. Workarounds:
+
+- **Hero text:** Native CSS `@media` queries
+- **Colors:** Explicit hex values (`#f9f9f9`)
+- **Spacing:** Explicit pixels (`gap-[24px]`)
 
 ## Deployment Challenges
 
-| Issue              | Cause                          | Fix                            |
-| ------------------ | ------------------------------ | ------------------------------ |
-| Rollup Linux error | Bun lockfile platform-specific | Removed `bun.lockb`, used npm  |
-| Fonts not applying | CSS inheritance issues         | Explicit Tailwind font classes |
-| dist not found     | Subdirectory structure         | Set Vercel Root Directory      |
+| Issue                | Fix                            |
+| -------------------- | ------------------------------ |
+| Rollup Linux error   | Removed `bun.lockb`, used npm  |
+| Fonts not applying   | Explicit Tailwind font classes |
+| dist not found       | Set Vercel Root Directory      |
+| Tailwind breakpoints | Native CSS media queries       |
 
 ## Browser Compatibility
 

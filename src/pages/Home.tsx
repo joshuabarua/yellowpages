@@ -54,15 +54,19 @@ const Home: React.FC = () => {
 	};
 
 	useEffect(() => {
+		const isMobile = window.innerWidth < 640;
+		const initialWidth = isMobile ? 300 : 500;
+		const initialInputWidth = isMobile ? 240 : 420;
+
 		gsap.fromTo(
 			heroRefs.map((ref) => ref.current),
 			{ y: 100, opacity: 0 },
 			{ y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.6 }
 		);
 
-		gsap.set(searchBarRef.current, { y: 60, width: 500, height: 54, opacity: 0 });
+		gsap.set(searchBarRef.current, { y: 60, width: initialWidth, height: 54, opacity: 0 });
 		gsap.set(searchIconRef.current, { opacity: 1 });
-		gsap.set(searchInputRef.current, { width: 420, opacity: 1, pointerEvents: 'auto' });
+		gsap.set(searchInputRef.current, { width: initialInputWidth, opacity: 1, pointerEvents: 'auto' });
 
 		const tl = gsap.timeline({ delay: 1.2 });
 		tl.to(searchBarRef.current, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
@@ -84,9 +88,12 @@ const Home: React.FC = () => {
 		if (isExpanded) return;
 		setIsExpanded(true);
 		floatingTween.current?.pause();
+		const isMobile = window.innerWidth < 640;
+		const expandedWidth = isMobile ? 300 : 500;
+		const inputWidth = isMobile ? 240 : 440;
 		gsap.to(searchBarRef.current, { y: 0, duration: 0.2, ease: 'power2.out' });
-		gsap.to(searchBarRef.current, { width: 500, height: 54, justifyContent: 'flex-start', paddingLeft: 16, duration: 0.4, ease: 'power2.out' });
-		gsap.to(searchInputRef.current, { width: 440, opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' });
+		gsap.to(searchBarRef.current, { width: expandedWidth, height: 54, justifyContent: 'flex-start', paddingLeft: 16, duration: 0.4, ease: 'power2.out' });
+		gsap.to(searchInputRef.current, { width: inputWidth, opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' });
 		setTimeout(() => searchInputRef.current?.focus(), 300);
 	};
 
@@ -103,12 +110,12 @@ const Home: React.FC = () => {
 			<section className="animated-gradient flex flex-col flex-1 items-center justify-around p-4 lg:p-8 min-h-screen relative">
 				<div
 					ref={heroContainerRef}
-					className="flex flex-col items-center hero-text-magnetic mt-[80px] select-none cursor-default"
+					className="flex flex-col items-center hero-text-magnetic mt-[40px] md:mt-[80px] select-none cursor-default px-4"
 					onMouseMove={handleMouseMove}
 					onMouseLeave={handleMouseLeave}
 				>
 					<div className="text-bulge-shadow">
-						<h1 ref={heroRefs[0]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+						<h1 ref={heroRefs[0]} className="hero-title font-renade uppercase font-extrabold text-gray-900 leading-none">
 							<span className="letter">G</span>
 							<span className="letter">E</span>
 							<span className="letter">L</span>
@@ -116,9 +123,9 @@ const Home: React.FC = () => {
 							<span className="letter">E</span>
 						</h1>
 					</div>
-					<div className="flex flex-row items-baseline justify-center mt-[-40px]">
+					<div className="flex flex-row items-baseline justify-center mt-[-20px]">
 						<div className="text-bulge-shadow">
-							<h1 ref={heroRefs[1]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+							<h1 ref={heroRefs[1]} className="hero-title font-renade uppercase font-extrabold text-gray-900 leading-none">
 								<span className="letter">S</span>
 								<span className="letter">E</span>
 								<span className="letter">I</span>
@@ -127,7 +134,7 @@ const Home: React.FC = () => {
 								<span className="letter">N</span>
 							</h1>
 						</div>
-						<p ref={heroRefs[2]} className="font-renade text-[180px] font-extrabold text-yellow-400 leading-none ml-2">
+						<p ref={heroRefs[2]} className="hero-dot font-renade font-extrabold text-yellow-400 leading-none ml-1">
 							.
 						</p>
 					</div>

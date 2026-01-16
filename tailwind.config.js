@@ -4,6 +4,13 @@ import animate from 'tailwindcss-animate';
 export default {
     content: ['./index.html', './src/**/*.{ts,tsx,js,jsx}', './node_modules/@shadcn/ui/**/*.{ts,tsx,js,jsx}'],
     theme: {
+        screens: {
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+            '2xl': '1536px',
+        },
         extend: {
             fontFamily: {
                 excon: ["Excon", "system-ui", "sans-serif"],
