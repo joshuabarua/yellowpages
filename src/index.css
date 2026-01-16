@@ -1,0 +1,159 @@
+/* Tailwind reset + utilities */
+@import "tailwindcss/preflight";
+@tailwind utilities;
+
+/* Third-party animations */
+@import "tw-animate-css";
+
+:root {
+	--background: 255 255 255;
+	--foreground: 36 36 36;
+	--primary: 255 215 86;
+	--primary-foreground: 0 0 0;
+}
+
+.dark {
+	--background: 36 36 36;
+	--foreground: 255 255 255;
+	--primary: 200 150 50;
+	--primary-foreground: 36 36 36;
+}
+
+/* ------------------------------
+   Fonts
+------------------------------ */
+@font-face {
+	font-family: "Renade";
+	src: url("./assets/fonts/Ranade-Variable.ttf") format("truetype");
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Excon";
+	src: url("./assets/fonts/Excon-Variable.ttf") format("truetype");
+	font-weight: 100 900;
+	font-style: normal;
+}
+
+/* ------------------------------
+   CSS Variables (light mode)
+------------------------------ */
+:root {
+	--primary: 255 215 86; /* RGB for Tailwind mapping */
+	--primary-foreground: 0 0 0;
+	--background: 255 255 255;
+	--foreground: 36 36 36;
+
+	/* Optional: add other variables if needed */
+	--secondary: 245 200 66;
+	--secondary-foreground: 36 36 36;
+	--destructive: 147 63 40;
+	--destructive-foreground: 255 255 255;
+
+	--border: 235 235 235;
+	--input: 245 245 245;
+	--ring: 180 180 180;
+}
+
+/* ------------------------------
+   Dark mode
+------------------------------ */
+.dark {
+	--primary: 200 150 50;
+	--primary-foreground: 36 36 36;
+	--background: 36 36 36;
+	--foreground: 255 255 255;
+
+	--secondary: 130 100 30;
+	--secondary-foreground: 255 255 255;
+	--destructive: 180 60 25;
+
+	--border: 50 50 50;
+	--input: 60 60 60;
+	--ring: 120 120 120;
+}
+
+/* ------------------------------
+   Base styles
+------------------------------ */
+@layer base {
+	html {
+		font-family: "Excon";
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: "Renade";
+	}
+
+	p {
+		font-family: "Excon";
+	}
+
+	body {
+		@apply bg-[rgb(var(--background)/1)] text-[rgb(var(--foreground)/1)];
+	}
+
+	* {
+		@apply border-[rgb(var(--border)/1)] outline-[rgb(var(--ring)/0.5)];
+	}
+
+	a {
+		@apply text-[rgb(var(--primary)/1)] underline hover:text-[rgb(var(--primary-foreground)/1)];
+	}
+}
+
+/* ------------------------------
+   Utility helpers
+------------------------------ */
+@layer utilities {
+	.bg-background {
+		background-color: rgb(var(--background) / 1);
+	}
+
+	.text-foreground {
+		color: rgb(var(--foreground) / 1);
+	}
+
+	.bg-primary {
+		background-color: rgb(var(--primary) / 1);
+	}
+
+	.text-primary-foreground {
+		color: rgb(var(--primary-foreground) / 1);
+	}
+
+	.bg-secondary {
+		background-color: rgb(var(--secondary) / 1);
+	}
+
+	.text-secondary-foreground {
+		color: rgb(var(--secondary-foreground) / 1);
+	}
+
+	.bg-destructive {
+		background-color: rgb(var(--destructive) / 1);
+	}
+
+	.text-destructive-foreground {
+		color: rgb(var(--destructive-foreground) / 1);
+	}
+
+	.border-border {
+		border-color: rgb(var(--border) / 1);
+	}
+
+	.ring-ring {
+		box-shadow: 0 0 0 1px rgb(var(--ring) / 1);
+	}
+
+	.text-sm {
+		font-size: var(--text-sm);
+		line-height: var(--text-sm--line-height);
+	}
+}

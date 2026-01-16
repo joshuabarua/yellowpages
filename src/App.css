@@ -1,0 +1,105 @@
+/* Import Tailwind preflight (replaces old @tailwind base) */
+@import 'tailwindcss/preflight';
+
+/* Tailwind utilities (replaces old @tailwind components + utilities) */
+@tailwind utilities;
+
+/* Optional third-party animations */
+@import 'tw-animate-css';
+
+:root {
+	--brand-50: #fff9e6;
+	--brand-100: #fff1c2;
+	--brand-200: #ffe58a;
+	--brand-300: #ffd756;
+	--brand-400: #f4c842;
+	--brand-500: #e6b93a;
+	--brand-600: #c99f2e;
+
+	/* Core UI */
+	--background: oklch(1 0 0);
+	--foreground: oklch(0.145 0 0);
+
+	--card: oklch(1 0 0);
+	--card-foreground: oklch(0.145 0 0);
+
+	/* Shadcn semantic tokens */
+	--primary: oklch(0.205 0 0);
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.97 0 0);
+	--secondary-foreground: oklch(0.205 0 0);
+	--destructive: oklch(0.577 0.245 27.325);
+	--destructive-foreground: 0 0% 100%;
+	--accent: oklch(0.97 0 0);
+	--accent-foreground: oklch(0.205 0 0);
+
+	--border: oklch(0.922 0 0);
+	--input: oklch(0.922 0 0);
+	--ring: oklch(0.708 0 0);
+
+	--radius: 0.625rem;
+	--shadow-brand: 0 10px 30px rgb(255 215 86 / 0.25);
+}
+
+/* Dark mode overrides */
+.dark {
+	--background: oklch(0.145 0 0);
+	--foreground: oklch(0.985 0 0);
+	--primary: oklch(0.922 0 0);
+	--primary-foreground: oklch(0.205 0 0);
+}
+
+/* ------------------------------
+   Utility helpers
+------------------------------ */
+@layer utilities {
+	.bg-background {
+		background-color: rgb(var(--background) / 1);
+	}
+
+	.text-foreground {
+		color: rgb(var(--foreground) / 1);
+	}
+
+	.bg-primary {
+		background-color: rgb(var(--primary) / 1);
+	}
+
+	.text-primary-foreground {
+		color: rgb(var(--primary-foreground) / 1);
+	}
+
+	.bg-secondary {
+		background-color: rgb(var(--secondary) / 1);
+	}
+
+	.text-secondary-foreground {
+		color: rgb(var(--secondary-foreground) / 1);
+	}
+
+	.bg-destructive {
+		background-color: rgb(var(--destructive) / 1);
+	}
+
+	.text-destructive-foreground {
+		color: rgb(var(--destructive-foreground) / 1);
+	}
+
+	.border-border {
+		border-color: rgb(var(--border) / 1);
+	}
+
+	.ring-ring {
+		box-shadow: 0 0 0 1px rgb(var(--ring) / 1);
+	}
+}
+
+/* ===== Global base styles ===== */
+@layer base {
+	body {
+		@apply bg-[rgb(var(--background)/1)] text-[rgb(var(--foreground)/1)];
+	}
+	* {
+		@apply border-[rgb(var(--border)/1)] outline-[rgb(var(--ring)/0.5)];
+	}
+}
