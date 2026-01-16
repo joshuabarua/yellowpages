@@ -12,6 +12,46 @@ const Home: React.FC = () => {
 	const searchIconRef = useRef<SVGSVGElement>(null);
 	const searchInputRef = useRef<HTMLInputElement>(null);
 	const floatingTween = useRef<gsap.core.Tween | null>(null);
+	const heroContainerRef = useRef<HTMLDivElement>(null);
+
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+		const container = heroContainerRef.current;
+		if (!container) return;
+
+		const letters = container.querySelectorAll('.letter');
+		letters.forEach((letter) => {
+			const el = letter as HTMLElement;
+			const letterRect = el.getBoundingClientRect();
+			const letterCenterX = letterRect.left + letterRect.width / 2;
+			const letterCenterY = letterRect.top + letterRect.height / 2;
+			const distX = e.clientX - letterCenterX;
+			const distY = e.clientY - letterCenterY;
+			const distance = Math.sqrt(distX * distX + distY * distY);
+			const maxDist = 250;
+			const intensity = Math.max(0, 1 - distance / maxDist);
+
+			const translateZ = intensity * 50;
+			const scale = 1 + intensity * 0.12;
+			const rotateX = (distY / maxDist) * -15 * intensity;
+			const rotateY = (distX / maxDist) * 15 * intensity;
+
+			el.style.transform = `translateZ(${translateZ}px) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+			el.style.textShadow = `0 ${intensity * 2}px ${intensity * 4}px rgba(0,0,0,${intensity * 0.08})`;
+			el.style.transition = 'transform 0.08s ease-out, text-shadow 0.08s ease-out';
+		});
+	};
+
+	const handleMouseLeave = () => {
+		const container = heroContainerRef.current;
+		if (!container) return;
+		const letters = container.querySelectorAll('.letter');
+		letters.forEach((letter) => {
+			const el = letter as HTMLElement;
+			el.style.transform = 'translateZ(0) scale(1) rotateX(0deg) rotateY(0deg)';
+			el.style.textShadow = 'none';
+			el.style.transition = 'transform 0.3s ease-out, text-shadow 0.3s ease-out';
+		});
+	};
 
 	useEffect(() => {
 		gsap.fromTo(
@@ -61,14 +101,32 @@ const Home: React.FC = () => {
 	return (
 		<div className="flex flex-col min-h-screen">
 			<section className="animated-gradient flex flex-col flex-1 items-center justify-around p-4 lg:p-8 min-h-screen relative">
-				<div className="flex flex-col items-center">
-					<h1 ref={heroRefs[0]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
-						GELBE
-					</h1>
-					<div className="flex flex-row items-baseline justify-center mt-[-40px]">
-						<h1 ref={heroRefs[1]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
-							SEITEN
+				<div
+					ref={heroContainerRef}
+					className="flex flex-col items-center hero-text-magnetic mt-[80px] select-none cursor-default"
+					onMouseMove={handleMouseMove}
+					onMouseLeave={handleMouseLeave}
+				>
+					<div className="text-bulge-shadow">
+						<h1 ref={heroRefs[0]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+							<span className="letter">G</span>
+							<span className="letter">E</span>
+							<span className="letter">L</span>
+							<span className="letter">B</span>
+							<span className="letter">E</span>
 						</h1>
+					</div>
+					<div className="flex flex-row items-baseline justify-center mt-[-40px]">
+						<div className="text-bulge-shadow">
+							<h1 ref={heroRefs[1]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+								<span className="letter">S</span>
+								<span className="letter">E</span>
+								<span className="letter">I</span>
+								<span className="letter">T</span>
+								<span className="letter">E</span>
+								<span className="letter">N</span>
+							</h1>
+						</div>
 						<p ref={heroRefs[2]} className="font-renade text-[180px] font-extrabold text-yellow-400 leading-none ml-2">
 							.
 						</p>

@@ -57,8 +57,22 @@
 	}
 }
 
-.bounce-chevron {
-	animation: bounce-chevron 1.5s ease-in-out infinite;
+/* 3D Magnetic Bulge Effect - Codrops Style */
+.hero-text-magnetic {
+	transform-style: preserve-3d;
+	perspective: 800px;
+}
+
+.hero-text-magnetic .letter {
+	display: inline-block;
+	transform-style: preserve-3d;
+	will-change: transform;
+}
+
+/* Text shadow for depth */
+.text-bulge-shadow {
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 2px 4px rgba(0, 0, 0, 0.1),
+		0 4px 8px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 :root {
