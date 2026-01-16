@@ -1,9 +1,12 @@
-import {Search} from 'lucide-react';
-import React, {useRef, useEffect} from 'react';
+import { Search, ChevronDown } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 import gsap from 'gsap';
 import HomeInfo from '../components/HomeInfo';
 
 const Home: React.FC = () => {
+	const navigate = useNavigate();
+	const [isExpanded, setIsExpanded] = useState(false);
 	const heroRefs = [useRef<HTMLHeadingElement>(null), useRef<HTMLHeadingElement>(null), useRef<HTMLParagraphElement>(null)];
 	const searchBarRef = useRef<HTMLDivElement>(null);
 	const searchIconRef = useRef<SVGSVGElement>(null);
@@ -13,71 +16,87 @@ const Home: React.FC = () => {
 	useEffect(() => {
 		gsap.fromTo(
 			heroRefs.map((ref) => ref.current),
-			{y: 100, opacity: 0},
-			{y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.6}
+			{ y: 100, opacity: 0 },
+			{ y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.6 }
 		);
 
-		gsap.set(searchBarRef.current, {width: 34, height: 34});
-		gsap.set(searchIconRef.current, {marginLeft: 0, opacity: 0});
-		gsap.set(searchInputRef.current, {width: 0, opacity: 0, pointerEvents: 'none'});
-		gsap.to(searchIconRef.current, {opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2});
-		floatingTween.current = gsap.to(searchBarRef.current, {
-			y: -8,
-			duration: 1.6,
-			yoyo: true,
-			repeat: -1,
-			ease: 'sine.inOut',
-		});
+		gsap.set(searchBarRef.current, { y: 60, width: 500, height: 54, opacity: 0 });
+		gsap.set(searchIconRef.current, { opacity: 1 });
+		gsap.set(searchInputRef.current, { width: 420, opacity: 1, pointerEvents: 'auto' });
+
+		const tl = gsap.timeline({ delay: 1.2 });
+		tl.to(searchBarRef.current, { y: 0, opacity: 1, duration: 0.6, ease: 'power3.out' })
+			.to(searchBarRef.current, { width: 54, height: 54, duration: 0.5, ease: 'power2.inOut' }, '+=0.8')
+			.to(searchInputRef.current, { width: 0, opacity: 0, pointerEvents: 'none', duration: 0.3 }, '<')
+			.to(searchIconRef.current, { marginLeft: 0, duration: 0.3 }, '<')
+			.call(() => {
+				floatingTween.current = gsap.to(searchBarRef.current, {
+					y: -8,
+					duration: 1.6,
+					yoyo: true,
+					repeat: -1,
+					ease: 'sine.inOut',
+				});
+			});
 	}, []);
 
-	const handleSearchEnter = () => {
+	const expandSearch = () => {
+		if (isExpanded) return;
+		setIsExpanded(true);
 		floatingTween.current?.pause();
-		gsap.to(searchBarRef.current, {y: 0, duration: 0.2, ease: 'power2.out'});
-		gsap.to(searchBarRef.current, {width: 500, duration: 0.4, ease: 'power2.out'});
-		gsap.to(searchIconRef.current, {marginLeft: 2, duration: 0.3, ease: 'power2.out'});
-		gsap.to(searchInputRef.current, {width: 420, opacity: 1, pointerEvents: 'auto', duration: 0.3, ease: 'power2.out', delay: 0.2});
+		gsap.to(searchBarRef.current, { y: 0, duration: 0.2, ease: 'power2.out' });
+		gsap.to(searchBarRef.current, { width: 500, height: 54, justifyContent: 'flex-start', paddingLeft: 16, duration: 0.4, ease: 'power2.out' });
+		gsap.to(searchInputRef.current, { width: 440, opacity: 1, pointerEvents: 'auto', duration: 0.4, ease: 'power2.out' });
+		setTimeout(() => searchInputRef.current?.focus(), 300);
 	};
-	const handleSearchLeave = () => {
-		gsap.to(searchInputRef.current, {width: 0, opacity: 0, pointerEvents: 'none', duration: 0.2, ease: 'power2.in'});
-		gsap.to(searchIconRef.current, {marginLeft: 0, duration: 0.2, ease: 'power2.in'});
-		gsap.to(searchBarRef.current, {width: 34, height: 34, duration: 0.3, ease: 'power2.in', delay: 0.1});
+
+	const collapseSearch = () => {
+		if (!isExpanded) return;
+		setIsExpanded(false);
+		gsap.to(searchInputRef.current, { width: 0, opacity: 0, pointerEvents: 'none', duration: 0.3, ease: 'power2.in' });
+		gsap.to(searchBarRef.current, { width: 54, height: 54, justifyContent: 'center', paddingLeft: 0, duration: 0.3, ease: 'power2.in' });
 		floatingTween.current?.resume();
 	};
 
 	return (
-		<div className="flex flex-col min-h-screen bg-[#feefbc]">
-			<section className="flex flex-col flex-1 items-center justify-center p-4 lg:p-8 min-h-screen">
-				<div className="flex flex-col items-center gap-2">
-					<h1 ref={heroRefs[0]} className="uppercase text-[96px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+		<div className="flex flex-col min-h-screen">
+			<section className="animated-gradient flex flex-col flex-1 items-center justify-around p-4 lg:p-8 min-h-screen relative">
+				<div className="flex flex-col items-center">
+					<h1 ref={heroRefs[0]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
 						GELBE
 					</h1>
-					<div className="flex flex-row items-start justify-center">
-						<div className="flex items-baseline">
-							<h1 ref={heroRefs[1]} className="uppercase text-[96px] font-extrabold text-gray-900 tracking-[30px] leading-none">
-								SEITEN
-							</h1>
-							<p ref={heroRefs[2]} className="text-[80px] font-extrabold text-yellow-400 leading-none ml-4 pb-4">
-								.
-							</p>
-						</div>
+					<div className="flex flex-row items-baseline justify-center mt-[-40px]">
+						<h1 ref={heroRefs[1]} className="font-renade uppercase text-[102px] font-extrabold text-gray-900 tracking-[30px] leading-none">
+							SEITEN
+						</h1>
+						<p ref={heroRefs[2]} className="font-renade text-[180px] font-extrabold text-yellow-400 leading-none ml-2">
+							.
+						</p>
 					</div>
 				</div>
-				<div className="relative flex justify-center mt-[40px]">
+				<div className="relative flex flex-col items-center mt-[50px]">
 					<div
 						ref={searchBarRef}
-						className="flex items-center bg-[#fbfaf4] rounded-full shadow overflow-hidden border border-gray-300"
-						onMouseEnter={handleSearchEnter}
-						onMouseLeave={handleSearchLeave}
-						tabIndex={0}
-						onFocus={handleSearchEnter}
-						onBlur={handleSearchLeave}>
-						<Search size={28} className="text-[#171616]  mx-3" ref={searchIconRef} />
+						className="flex items-center justify-center bg-[#fbfaf4] rounded-full shadow overflow-hidden border border-gray-300 cursor-pointer"
+						onClick={expandSearch}
+						tabIndex={0}>
+						<Search size={24} className="text-[#171616] shrink-0" ref={searchIconRef} />
 						<input
 							ref={searchInputRef}
 							type="text"
-							placeholder={'What are you searching for?'}
-							className="bg-white outline-none border-0 text-lg opacity-0 w-0 pointer-events-none"
+							placeholder={isExpanded ? 'Restaurants, Ärzte, Handwerker...' : ''}
+							className="font-excon bg-transparent outline-none border-0 text-[16px] opacity-0 w-0 pointer-events-none ml-[12px]"
+							onKeyDown={(e) => e.key === 'Enter' && navigate('/suche')}
+							onBlur={collapseSearch}
 						/>
+					</div>
+				</div>
+				<div className="flex bottom-[5px] flex flex-col items-center w-full justify-center gap-3">
+					<p className="font-excon text-[14px] text-gray-600 tracking-wide">
+						Finden Sie alles in Ihrer Nähe
+					</p>
+					<div className="bounce-chevron">
+						<ChevronDown size={24} className="text-gray-500" />
 					</div>
 				</div>
 			</section>

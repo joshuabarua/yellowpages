@@ -7,7 +7,16 @@ vi.mock('gsap', () => ({
         fromTo: vi.fn(),
         set: vi.fn(),
         to: vi.fn(() => ({ pause: vi.fn(), resume: vi.fn() })),
+        timeline: vi.fn(() => ({
+            to: vi.fn().mockReturnThis(),
+            call: vi.fn().mockReturnThis(),
+        })),
+        registerPlugin: vi.fn(),
     },
+}));
+
+vi.mock('gsap/ScrollTrigger', () => ({
+    ScrollTrigger: {},
 }));
 
 describe('Home', () => {
@@ -36,8 +45,8 @@ describe('Home', () => {
 
     it('renders the search bar', () => {
         render(<Home />);
-        const searchInput = screen.getByPlaceholderText('What are you searching for?');
-        expect(searchInput).toBeInTheDocument();
+        const searchBar = screen.getByRole('textbox');
+        expect(searchBar).toBeInTheDocument();
     });
 
     it('renders the HomeInfo section', () => {
@@ -45,10 +54,9 @@ describe('Home', () => {
         expect(screen.getByText('Unsere Top-Angebote')).toBeInTheDocument();
     });
 
-    it('has correct background color', () => {
-        const { container } = render(<Home />);
-        const mainDiv = container.firstChild;
-        expect(mainDiv).toHaveClass('bg-[#feefbc]');
+    it('renders the tagline', () => {
+        render(<Home />);
+        expect(screen.getByText('Finden Sie alles in Ihrer Nähe')).toBeInTheDocument();
     });
 
     it('search bar is focusable', () => {

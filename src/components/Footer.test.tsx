@@ -45,6 +45,6 @@ describe('Footer', () => {
     it('has correct href on legal links', () => {
         render(<Footer />);
         const impressumLink = screen.getByText('Impressum');
-        expect(impressumLink.closest('a')).toHaveAttribute('href', '#');
+        expect(impressumLink.closest('a')).toHaveAttribute('href', 'https://www.gelbeseiten.de/impressum');
     });
 });

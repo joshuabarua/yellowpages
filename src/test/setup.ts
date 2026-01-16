@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import { vi } from 'vitest';
 
 Object.defineProperty(window, 'matchMedia', {
     writable: true,
@@ -18,3 +19,26 @@ Object.defineProperty(window, 'scrollTo', {
     writable: true,
     value: () => { },
 });
+
+class MockIntersectionObserver {
+    observe = vi.fn();
+    unobserve = vi.fn();
+    disconnect = vi.fn();
+    constructor(callback: IntersectionObserverCallback) {
+        setTimeout(() => callback([{ isIntersecting: true } as IntersectionObserverEntry], this as unknown as IntersectionObserver), 0);
+    }
+}
+
+Object.defineProperty(window, 'IntersectionObserver', {
+    writable: true,
+    value: MockIntersectionObserver,
+});
+
+vi.mock('@clerk/clerk-react', () => ({
+    ClerkProvider: ({ children }: { children: React.ReactNode }) => children,
+    SignedIn: ({ children }: { children: React.ReactNode }) => children,
+    SignedOut: ({ children }: { children: React.ReactNode }) => children,
+    UserButton: () => null,
+    useUser: () => ({ isLoaded: true, user: { firstName: 'Test' } }),
+    useClerk: () => ({ signOut: vi.fn() }),
+}));

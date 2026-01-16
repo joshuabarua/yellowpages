@@ -5,6 +5,62 @@
 /* Third-party animations */
 @import "tw-animate-css";
 
+@keyframes wiggle {
+	0%,
+	100% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(-8deg);
+	}
+	75% {
+		transform: rotate(8deg);
+	}
+}
+
+.hover-wiggle:hover {
+	animation: wiggle 0.4s ease-in-out;
+}
+
+@keyframes gradient-shift {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.animated-gradient {
+	background: linear-gradient(
+		-45deg,
+		#feefbc,
+		#fef3c7,
+		#fde68a,
+		#fcd34d,
+		#feefbc
+	);
+	background-size: 400% 400%;
+	animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes bounce-chevron {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(8px);
+	}
+}
+
+.bounce-chevron {
+	animation: bounce-chevron 1.5s ease-in-out infinite;
+}
+
 :root {
 	--background: 255 255 255;
 	--foreground: 36 36 36;
@@ -104,7 +160,7 @@
 	}
 
 	a {
-		@apply text-[rgb(var(--primary)/1)] underline hover:text-[rgb(var(--primary-foreground)/1)];
+		@apply text-inherit no-underline hover:text-inherit;
 	}
 }
 
