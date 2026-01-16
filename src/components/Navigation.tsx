@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {PersonStanding} from 'lucide-react';
-import {Button} from './ui/button';
+import React, { useEffect, useState } from 'react';
+import { PersonStanding } from 'lucide-react';
+import { Button } from './ui/button';
 
 export const Navigation: React.FC = () => {
 	const [show, setShow] = useState(false);
@@ -20,7 +20,7 @@ export const Navigation: React.FC = () => {
 				</div>
 				<div className="flex flex-row items-center justify-end w-full ">
 					<div className="flex flex-row items-center justify-end gap-[4px] w-[200px]">
-						<a href="https://www.gelbeseiten.de/gsservice/barrierefrei">
+						<a href="https://www.gelbeseiten.de/gsservice/barrierefrei" aria-label="Barrierefreiheit">
 							<Button variant={'outline'} className="rounded-full border-[0.5px]">
 								<PersonStanding size={12} />
 							</Button>
