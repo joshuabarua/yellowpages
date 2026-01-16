@@ -1,5 +1,5 @@
-import { Search } from 'lucide-react';
-import React, { useRef, useEffect } from 'react';
+import {Search} from 'lucide-react';
+import React, {useRef, useEffect} from 'react';
 import gsap from 'gsap';
 import HomeInfo from '../components/HomeInfo';
 
@@ -13,14 +13,14 @@ const Home: React.FC = () => {
 	useEffect(() => {
 		gsap.fromTo(
 			heroRefs.map((ref) => ref.current),
-			{ y: 100, opacity: 0 },
-			{ y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.6 }
+			{y: 100, opacity: 0},
+			{y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power3.out', delay: 0.6}
 		);
 
-		gsap.set(searchBarRef.current, { width: 34, height: 34 });
-		gsap.set(searchIconRef.current, { marginLeft: 0, opacity: 0 });
-		gsap.set(searchInputRef.current, { width: 0, opacity: 0, pointerEvents: 'none' });
-		gsap.to(searchIconRef.current, { opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 });
+		gsap.set(searchBarRef.current, {width: 34, height: 34});
+		gsap.set(searchIconRef.current, {marginLeft: 0, opacity: 0});
+		gsap.set(searchInputRef.current, {width: 0, opacity: 0, pointerEvents: 'none'});
+		gsap.to(searchIconRef.current, {opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2});
 		floatingTween.current = gsap.to(searchBarRef.current, {
 			y: -8,
 			duration: 1.6,
@@ -32,15 +32,15 @@ const Home: React.FC = () => {
 
 	const handleSearchEnter = () => {
 		floatingTween.current?.pause();
-		gsap.to(searchBarRef.current, { y: 0, duration: 0.2, ease: 'power2.out' });
-		gsap.to(searchBarRef.current, { width: 500, duration: 0.4, ease: 'power2.out' });
-		gsap.to(searchIconRef.current, { marginLeft: 2, duration: 0.3, ease: 'power2.out' });
-		gsap.to(searchInputRef.current, { width: 420, opacity: 1, pointerEvents: 'auto', duration: 0.3, ease: 'power2.out', delay: 0.2 });
+		gsap.to(searchBarRef.current, {y: 0, duration: 0.2, ease: 'power2.out'});
+		gsap.to(searchBarRef.current, {width: 500, duration: 0.4, ease: 'power2.out'});
+		gsap.to(searchIconRef.current, {marginLeft: 2, duration: 0.3, ease: 'power2.out'});
+		gsap.to(searchInputRef.current, {width: 420, opacity: 1, pointerEvents: 'auto', duration: 0.3, ease: 'power2.out', delay: 0.2});
 	};
 	const handleSearchLeave = () => {
-		gsap.to(searchInputRef.current, { width: 0, opacity: 0, pointerEvents: 'none', duration: 0.2, ease: 'power2.in' });
-		gsap.to(searchIconRef.current, { marginLeft: 0, duration: 0.2, ease: 'power2.in' });
-		gsap.to(searchBarRef.current, { width: 34, height: 34, duration: 0.3, ease: 'power2.in', delay: 0.1 });
+		gsap.to(searchInputRef.current, {width: 0, opacity: 0, pointerEvents: 'none', duration: 0.2, ease: 'power2.in'});
+		gsap.to(searchIconRef.current, {marginLeft: 0, duration: 0.2, ease: 'power2.in'});
+		gsap.to(searchBarRef.current, {width: 34, height: 34, duration: 0.3, ease: 'power2.in', delay: 0.1});
 		floatingTween.current?.resume();
 	};
 
@@ -77,8 +77,6 @@ const Home: React.FC = () => {
 							type="text"
 							placeholder={'What are you searching for?'}
 							className="bg-white outline-none border-0 text-lg opacity-0 w-0 pointer-events-none"
-							onFocus={(e) => (e.currentTarget.placeholder = 'What are you searching for?')}
-							onBlur={(e) => (e.currentTarget.placeholder = '')}
 						/>
 					</div>
 				</div>

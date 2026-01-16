@@ -66,36 +66,33 @@ const HomeInfo: React.FC = () => {
 		<section className="w-full bg-[#faf8f3] py-[80px]">
 			<div className="max-w-6xl mx-auto px-[48px]">
 				<h2 className="font-renade text-[11px] uppercase tracking-[0.15em] text-gray-400 mb-[12px]">Entdecken</h2>
-				<h1 className="font-renade text-[32px] text-gray-900 mb-[48px]">Unsere Top-Angebote</h1>
+				<h1 className="font-renade text-[32px] text-[#323131] mb-[48px]">Unsere Top-Angebote</h1>
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[24px]">
 					{gridItems.slice(0, 6).map((item, i) => (
 						<div
 							key={i}
-							className="group flex flex-col bg-white rounded-[16px] p-[32px] min-h-[100px] border-gray-100 border-[0.5px]  hover:translate-y-[-10px] transition-all ease-in-out duration-200">
-							<div className="flex items-center gap-[16px]">
+							className="group flex flex-col bg-[#fff] rounded-[16px] p-[22px] min-h-[80px] border-gray-100 border-[0.5px]  hover:translate-y-[-10px] transition-all ease-in-out duration-200">
+							<div className="flex items-center gap-[10px]">
 								<div className="flex items-center justify-center h-[44px] w-[44px] min-w-[44px] rounded-[12px] bg-[#faf8f3] transition-colors">
-									{React.cloneElement(item.icon, {className: 'h-[20px] w-[20px] text-gray-700'})}
+									{React.cloneElement(item.icon, {className: 'h-[42px] w-[42px] text-gray-700'})}
 								</div>
-								<div className="flex flex-col gap-[4px]">
-									<div className="font-renade text-[15px] text-gray-900 leading-snug">
+								<div className="flex flex-col gap-[0px]">
+									<div className="text-[18px] text-[#111010] leading-none">
 										{item.titleLines ? (
-											<div className="flex flex-col">
+											<div className="flex flex-col text-pretty">
 												{item.titleLines.map((line) => (
-													<span key={line}>{line}</span>
+													<h1 className={'font-renade'} key={line}>
+														{line}
+													</h1>
 												))}
 											</div>
 										) : (
 											item.title
 										)}
 									</div>
-									{item.cta && (
-										<a href={item.link} className="font-excon text-[13px] text-gray-500 hover:text-gray-900 transition-colors">
-											{item.cta}
-										</a>
-									)}
+									{item.desc && <p className="font-excon text-[12px] text-gray-500 leading-relaxed mt-[16px]">{item.desc}</p>}
 								</div>
 							</div>
-							{item.desc && <p className="font-excon text-[13px] text-gray-500 leading-relaxed mt-[16px]">{item.desc}</p>}
 						</div>
 					))}
 				</div>
